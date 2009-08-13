@@ -5,13 +5,11 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "rack-google_analytics"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.summary = %Q{Google Analytics for Rack applications}
+    gem.description = %Q{Embeds GA tracking code in the bottom of HTML documents}
     gem.email = "jasper@ambethia.com"
     gem.homepage = "http://github.com/ambethia/rack-google_analytics"
     gem.authors = ["Jason L Perry"]
-    gem.add_development_dependency "thoughtbot-shoulda"
-    # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
 rescue LoadError
   puts "Jeweler (or a dependency) not available. Install it with: sudo gem install jeweler"
@@ -30,10 +28,11 @@ begin
     test.libs << 'test'
     test.pattern = 'test/**/*_test.rb'
     test.verbose = true
+    test.rcov_opts << "--exclude 'var/*,gems/*'"
   end
 rescue LoadError
   task :rcov do
-    abort "RCov is not available. In order to run rcov, you must: sudo gem install spicycode-rcov"
+    abort "RCov is not available. In order to run rcov, you must: sudo gem install relevance-rcov"
   end
 end
 
@@ -53,4 +52,5 @@ Rake::RDocTask.new do |rdoc|
   rdoc.title = "rack-google_analytics #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
+  rdoc .options << "--all"
 end
