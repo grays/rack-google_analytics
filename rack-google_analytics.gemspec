@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{rack-google_analytics}
-  s.version = "0.0.0"
+  s.version = "1.0.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jason L Perry"]
@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
      "Rakefile",
      "VERSION",
      "lib/rack/google_analytics.rb",
+     "rack-google_analytics.gemspec",
      "test/rack/google_analytics_test.rb",
      "test/test_helper.rb"
   ]
