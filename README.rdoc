@@ -19,7 +19,7 @@ Rack middleware to embed Google Analytics tracking code.
 == TODO and Motivations
 
 This isn't very "feature rich", because I've mostly written it as an
-excuse to learn more about rack. Hell, it's possibly someone has already done
+excuse to learn more about rack. Hell, it's possible someone has already done
 it (and better); I didn't bother to look. See the notes below on contributing
 fixes for these deficiencies. 
 
