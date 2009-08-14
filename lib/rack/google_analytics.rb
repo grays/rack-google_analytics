@@ -6,12 +6,12 @@ module Rack #:nodoc:
 
       if headers["Content-Type"] =~ /text\/html|application\/xhtml\+xml/
         body = ""
-        response.each { |part| body += part }
+        response.each { |part| body << part }
         index = body.rindex("</body>")
         if index
           body.insert(index, tracking_code(options[:web_property_id]))
           headers["Content-Length"] = body.length.to_s
-          response = body
+          response = [body]
         end
       end
 

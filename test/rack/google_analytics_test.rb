@@ -12,11 +12,11 @@ class Rack::GoogleAnalyticsTest < Test::Unit::TestCase
   end
 
   def test_dont_embed_code_in_non_html_documents
-    assert_no_match TRACKER_EXPECT, request(:content_type => "text/xml", :body => XML_DOC).body 
+    assert_no_match TRACKER_EXPECT, request(:content_type => "text/xml", :body => [XML_DOC]).body 
   end
 
   def test_should_not_raise_exception_if_theres_no_html_body_tag
-    assert_nothing_raised { request(:body => "<html></html>") }
+    assert_nothing_raised { request(:body => ["<html></html>"]) }
   end
 
   def test_shoud_buff_content_length_by_the_size_of_tracker_code
@@ -53,9 +53,9 @@ class Rack::GoogleAnalyticsTest < Test::Unit::TestCase
 
     def app opts = {}
       opts[:content_type] ||= "text/html"
-      opts[:body]         ||= HTML_DOC
+      opts[:body]         ||= [HTML_DOC]
       rack_app = lambda { |env| [200, { 'Content-Type' => opts[:content_type] }, opts[:body]] }
-      Rack::GoogleAnalytics.new(rack_app, :web_property_id => "UA-0000000-0")
+      Rack::GoogleAnalytics.new(rack_app, :web_property_id => "UA-0000000-1")
     end
 
 end

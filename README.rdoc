@@ -6,7 +6,7 @@ Rack middleware to embed Google Analytics tracking code.
 
   require "rack/google_analytics"
 
-  use Rack::GoogleAnalytics, :web_property_id => "UA-000000-0"
+  use Rack::GoogleAnalytics, :web_property_id => "UA-000000-1"
 
   app = lambda { |env| [200, { 'Content-Type' => 'text/html' }, '<html><body></body></html>'] }
   run app
