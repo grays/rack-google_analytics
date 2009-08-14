@@ -14,7 +14,7 @@ Rack middleware to embed Google Analytics tracking code.
 == Configuring for a Rails App
 
   config.gem "ambethia-rack-google_analytics", :lib => "rack/google_analytics", :source => "http://gems.github.com"
-  config.middleware.use "Rack::GoogleAnalytics", :web_property_id => "UA-0000000-0"
+  config.middleware.use "Rack::GoogleAnalytics", :web_property_id => "UA-0000000-1"
 
 == TODO and Motivations
 
