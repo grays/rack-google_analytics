@@ -11,6 +11,7 @@ begin
     gem.homepage = "http://github.com/ambethia/rack-google_analytics"
     gem.authors = ["Jason L Perry"]
   end
+  Jeweler::GemcutterTasks.new
 rescue LoadError
   puts "Jeweler (or a dependency) not available. Install it with: sudo gem install jeweler"
 end
