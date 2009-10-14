@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{rack-google_analytics}
-  s.version = "1.0.0"
+  s.version = "1.0.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jason L Perry"]
-  s.date = %q{2009-08-13}
+  s.date = %q{2009-10-14}
   s.description = %q{Embeds GA tracking code in the bottom of HTML documents}
   s.email = %q{jasper@ambethia.com}
   s.extra_rdoc_files = [
@@ -28,11 +28,10 @@ Gem::Specification.new do |s|
      "test/rack/google_analytics_test.rb",
      "test/test_helper.rb"
   ]
-  s.has_rdoc = true
   s.homepage = %q{http://github.com/ambethia/rack-google_analytics}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.2}
+  s.rubygems_version = %q{1.3.5}
   s.summary = %q{Google Analytics for Rack applications}
   s.test_files = [
     "test/rack/google_analytics_test.rb",
