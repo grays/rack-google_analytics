@@ -30,8 +30,8 @@ document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.
 </script>
 <script type="text/javascript">
 try {
-var pageTracker = _gat._getTracker("#{web_property_id}");
-pageTracker._trackPageview();
+var #{options[:prefix]}pageTracker = _gat._getTracker("#{web_property_id}");
+#{options[:prefix]}pageTracker._trackPageview();
 } catch(err) {}</script>
 EOF
       end

@@ -24,6 +24,15 @@ class Rack::GoogleAnalyticsTest < Test::Unit::TestCase
       assert_equal HTML_DOC.length + app.send(:tracking_code, WEB_PROPERTY_ID).length, req.content_length
     end
   end
+  
+  def test_shoud_include_pageTracker_definition
+    assert_match( /#{Regexp.escape('var pageTracker = _gat.')}/, request.body)
+  end
+  
+  def test_shoud_append_prefix_to_pageTracker_definition
+    assert_match( /#{Regexp.escape('var conductor_pageTracker = _gat.')}/, request(:prefix => 'conductor_').body)
+  end
+  
 
   private
     WEB_PROPERTY_ID = "UA-0000000-1"
@@ -58,10 +67,12 @@ class Rack::GoogleAnalyticsTest < Test::Unit::TestCase
     end
 
     def app(opts = {})
+      opts = opts.clone
       opts[:content_type] ||= "text/html"
       opts[:body]         ||= [HTML_DOC]
-      rack_app = lambda { |env| [200, { 'Content-Type' => opts[:content_type] }, opts[:body]] }
-      Rack::GoogleAnalytics.new(rack_app, :web_property_id => WEB_PROPERTY_ID)
+      rack_app = lambda { |env| [200, { 'Content-Type' => opts.delete(:content_type) }, opts.delete(:body)] }
+      opts[:web_property_id] ||= WEB_PROPERTY_ID
+      Rack::GoogleAnalytics.new(rack_app, opts)
     end
 
 end
