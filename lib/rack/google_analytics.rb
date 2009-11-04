@@ -18,7 +18,7 @@ module Rack #:nodoc:
       [status, headers, response]
     end
 
-    private
+    protected
 
       # Returns JS to be embeded. This takes one argument, a Web Property ID
       # (aka UA number).

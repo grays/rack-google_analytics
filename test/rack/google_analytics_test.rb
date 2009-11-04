@@ -20,10 +20,13 @@ class Rack::GoogleAnalyticsTest < Test::Unit::TestCase
   end
 
   def test_shoud_buff_content_length_by_the_size_of_tracker_code
-    assert_equal HTML_DOC.length + 406, request.content_length
+    request do |app, req|
+      assert_equal HTML_DOC.length + app.send(:tracking_code, WEB_PROPERTY_ID).length, req.content_length
+    end
   end
 
   private
+    WEB_PROPERTY_ID = "UA-0000000-1"
 
     TRACKER_EXPECT = /<script.*pageTracker.*<\/script>\s?<\/body>/m
 
@@ -48,14 +51,17 @@ class Rack::GoogleAnalyticsTest < Test::Unit::TestCase
     EOF
 
     def request(opts = {})
-      Rack::MockRequest.new(app(opts)).get("/")
+      @application = app(opts)
+      @request = Rack::MockRequest.new(@application).get("/")
+      yield(@application, @request) if block_given?
+      @request
     end
 
     def app(opts = {})
       opts[:content_type] ||= "text/html"
       opts[:body]         ||= [HTML_DOC]
       rack_app = lambda { |env| [200, { 'Content-Type' => opts[:content_type] }, opts[:body]] }
-      Rack::GoogleAnalytics.new(rack_app, :web_property_id => "UA-0000000-1")
+      Rack::GoogleAnalytics.new(rack_app, :web_property_id => WEB_PROPERTY_ID)
     end
 
 end
