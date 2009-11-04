@@ -1,7 +1,7 @@
 module Rack #:nodoc:
   class GoogleAnalytics < Struct.new :app, :options
 
-    def call env
+    def call(env)
       status, headers, response = app.call(env)
 
       if headers["Content-Type"] =~ /text\/html|application\/xhtml\+xml/
@@ -22,7 +22,7 @@ module Rack #:nodoc:
 
       # Returns JS to be embeded. This takes one argument, a Web Property ID
       # (aka UA number).
-      def tracking_code web_property_id
+      def tracking_code(web_property_id)
         return <<-EOF
 <script type="text/javascript">
 var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");

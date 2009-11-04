@@ -47,11 +47,11 @@ class Rack::GoogleAnalyticsTest < Test::Unit::TestCase
     </poem>
     EOF
 
-    def request opts = {}
+    def request(opts = {})
       Rack::MockRequest.new(app(opts)).get("/")
     end
 
-    def app opts = {}
+    def app(opts = {})
       opts[:content_type] ||= "text/html"
       opts[:body]         ||= [HTML_DOC]
       rack_app = lambda { |env| [200, { 'Content-Type' => opts[:content_type] }, opts[:body]] }
