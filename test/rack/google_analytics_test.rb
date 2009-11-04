@@ -32,6 +32,22 @@ class Rack::GoogleAnalyticsTest < Test::Unit::TestCase
   def test_shoud_append_prefix_to_pageTracker_definition
     assert_match( /#{Regexp.escape('var conductor_pageTracker = _gat.')}/, request(:prefix => 'conductor_').body)
   end
+
+  def test_shoud_allow_multiple_top_level_domains
+    assert_match( /#{Regexp.escape('pageTracker._setDomainName("none")')}/, request(:multiple_top_level_domains => true).body)
+    assert_match( /#{Regexp.escape('pageTracker._setAllowLinker(true)')}/, request(:multiple_top_level_domains => true).body)
+  end
+
+  def test_multiple_top_level_domains_should_supercede_domain_name
+    request(:multiple_top_level_domains => true, :domain_name => '.test.com') do |app, req|
+      assert_match( /#{Regexp.escape('pageTracker._setDomainName("none")')}/, req.body)
+      assert_no_match( /#{Regexp.escape('pageTracker._setDomainName(".test.com")')}/, req.body)
+    end
+  end
+
+  def test_shoud_allow_domain_name
+    assert_match( /#{Regexp.escape('pageTracker._setDomainName(".test.com")')}/, request(:domain_name => '.test.com').body)
+  end
   
 
   private
