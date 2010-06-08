@@ -19,21 +19,21 @@ class Rack::GoogleAnalyticsTest < Test::Unit::TestCase
     assert_nothing_raised { request(:body => ["<html></html>"]) }
   end
 
-  def test_shoud_buff_content_length_by_the_size_of_tracker_code
+  def test_should_buff_content_length_by_the_size_of_tracker_code
     request do |app, req|
       assert_equal HTML_DOC.length + app.send(:tracking_code, WEB_PROPERTY_ID).length, req.content_length
     end
   end
   
-  def test_shoud_include_pageTracker_definition
+  def test_should_include_pageTracker_definition
     assert_match( /#{Regexp.escape('var pageTracker = _gat.')}/, request.body)
   end
   
-  def test_shoud_append_prefix_to_pageTracker_definition
+  def test_should_append_prefix_to_pageTracker_definition
     assert_match( /#{Regexp.escape('var conductor_pageTracker = _gat.')}/, request(:prefix => 'conductor_').body)
   end
 
-  def test_shoud_allow_multiple_top_level_domains
+  def test_should_allow_multiple_top_level_domains
     assert_match( /#{Regexp.escape('pageTracker._setDomainName("none")')}/, request(:multiple_top_level_domains => true).body)
     assert_match( /#{Regexp.escape('pageTracker._setAllowLinker(true)')}/, request(:multiple_top_level_domains => true).body)
   end
@@ -45,7 +45,7 @@ class Rack::GoogleAnalyticsTest < Test::Unit::TestCase
     end
   end
 
-  def test_shoud_allow_domain_name
+  def test_should_allow_domain_name
     assert_match( /#{Regexp.escape('pageTracker._setDomainName(".test.com")')}/, request(:domain_name => '.test.com').body)
   end
   
