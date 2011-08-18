@@ -1,5 +1,7 @@
-require 'test_helper'
+require 'test/unit'
 require 'rack/mock'
+
+require 'rack/google_analytics'
 
 class Rack::GoogleAnalyticsTest < Test::Unit::TestCase
 
@@ -24,11 +26,11 @@ class Rack::GoogleAnalyticsTest < Test::Unit::TestCase
       assert_equal HTML_DOC.length + app.send(:tracking_code, WEB_PROPERTY_ID).length, req.content_length
     end
   end
-  
+
   def test_should_include_pageTracker_definition
     assert_match( /#{Regexp.escape('var pageTracker = _gat.')}/, request.body)
   end
-  
+
   def test_should_append_prefix_to_pageTracker_definition
     assert_match( /#{Regexp.escape('var conductor_pageTracker = _gat.')}/, request(:prefix => 'conductor_').body)
   end
@@ -48,7 +50,6 @@ class Rack::GoogleAnalyticsTest < Test::Unit::TestCase
   def test_should_allow_domain_name
     assert_match( /#{Regexp.escape('pageTracker._setDomainName(".test.com")')}/, request(:domain_name => '.test.com').body)
   end
-  
 
   private
     WEB_PROPERTY_ID = "UA-0000000-1"
