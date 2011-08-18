@@ -1,8 +1,8 @@
 Gem::Specification.new do |spec|
   spec.name        = 'rack-google_analytics'
-  spec.version     = '1.0.1'
+  spec.version     = '1.0.2'
   spec.authors     = ['Jason L Perry']
-  spec.date        = '2009-11-04'
+  spec.date        = '2011-08-18'
   spec.summary     = 'Google Analytics for Rack applications'
   spec.description = 'Embeds Google Analytics tracking code in the bottom of HTML documents'
   spec.email       = 'jasper@ambethia.com'
